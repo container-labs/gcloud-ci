@@ -1,21 +1,7 @@
 # this broke and is discussed here
 # https://github.com/GoogleCloudPlatform/cloud-sdk-docker/issues/74
-
-# FROM google/cloud-sdk:latest
-#
-# RUN apt-get install google-cloud-sdk
-# RUN gcloud components install beta
-#
-#
-#
-#
-#
-#
-
 FROM debian:jessie
-ENV CLOUD_SDK_VERSION 171.0.0
-
-#ENV INSTALL_COMPONENTS beta
+ENV CLOUD_SDK_VERSION 173.0.0
 
 RUN apt-get update -qqy && apt-get install -qqy \
         curl \
@@ -27,14 +13,14 @@ RUN apt-get update -qqy && apt-get install -qqy \
         openssh-client \
         git \
     && easy_install -U pip && \
-    pip install -U crcmod && \
-    export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
-    echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" > /etc/apt/sources.list.d/google-cloud-sdk.list && \
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    apt-get update && apt-get install -y google-cloud-sdk=${CLOUD_SDK_VERSION}
+    pip install -U crcmod
 
-# used to be google-cloud-sdk=${CLOUD_SDK_VERSION}-0
-
+RUN curl "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-$CLOUD_SDK_VERSION-linux-x86.tar.gz" > cloud-sdk.tar.gz && \
+    tar -xvf cloud-sdk.tar.gz && \
+    cd google-cloud-sdk && ./install.sh
+# add gcloud binary to the path
+ENV PATH="./google-cloud-sdk/bin:${PATH}"
+RUN echo $PATH
 RUN gcloud components install beta
 
 # turn some shit off
