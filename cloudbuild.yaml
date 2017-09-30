@@ -6,7 +6,7 @@ steps:
 
 - name: 'gcr.io/$PROJECT_ID/google-sdk-ci'
   id: ListPath
-  args: ['echo', "$PATH"]
+  args: ['./echo-path.sh']
   waitFor:
   - BuildImage
 
