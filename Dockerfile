@@ -20,7 +20,6 @@ RUN curl "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-$CLO
     cd google-cloud-sdk && ./install.sh
 # add gcloud binary to the path
 ENV PATH="/google-cloud-sdk/bin:${PATH}"
-RUN echo $PATH
 RUN gcloud components install beta
 
 # turn some shit off
