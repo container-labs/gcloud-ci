@@ -5,12 +5,6 @@ steps:
   args: ['build', '-f', 'Dockerfile', '--tag=gcr.io/$PROJECT_ID/google-sdk-ci', '.']
 
 - name: 'gcr.io/$PROJECT_ID/google-sdk-ci'
-  id: ListPath
-  args: ['./echo-path.sh']
-  waitFor:
-  - BuildImage
-
-- name: 'gcr.io/$PROJECT_ID/google-sdk-ci'
   id: ListComponents
   waitFor:
   - BuildImage
