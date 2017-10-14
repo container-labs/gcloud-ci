@@ -3,3 +3,8 @@ version: '2'
 services:
   sdk:
     build: ./
+
+  sdk-alpine:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.alpine  
