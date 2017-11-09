@@ -1,7 +1,7 @@
 # this broke and is discussed here
 # https://github.com/GoogleCloudPlatform/cloud-sdk-docker/issues/74
 FROM debian:jessie
-ENV CLOUD_SDK_VERSION 175.0.0
+ENV CLOUD_SDK_VERSION 179.0.0
 
 RUN apt-get update -qqy && apt-get install -qqy \
         curl \
