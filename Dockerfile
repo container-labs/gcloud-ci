@@ -1,7 +1,7 @@
 # this broke and is discussed here
 # https://github.com/GoogleCloudPlatform/cloud-sdk-docker/issues/74
 FROM debian:buster
-ENV CLOUD_SDK_VERSION 311.0.0
+ENV CLOUD_SDK_VERSION 312.0.0
 
 RUN apt-get update -qqy && apt-get install -qqy \
         curl \
@@ -11,9 +11,9 @@ RUN apt-get update -qqy && apt-get install -qqy \
         apt-transport-https \
         lsb-release \
         openssh-client \
-        git \
-    && easy_install -U pip && \
-    pip install -U crcmod
+        git
+    # && easy_install -U pip && \
+    # pip install -U crcmod
 
 RUN curl "https://storage.googleapis.com/cloud-sdk-release/google-cloud-sdk-$CLOUD_SDK_VERSION-linux-x86.tar.gz" > cloud-sdk.tar.gz && \
     tar -xvf cloud-sdk.tar.gz && \

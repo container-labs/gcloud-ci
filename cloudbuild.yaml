@@ -2,11 +2,11 @@ steps:
 
 - name: 'gcr.io/cloud-builders/docker'
   id: BuildImage
-  args: ['build', '-f', 'Dockerfile', '--tag=gcr.io/$PROJECT_ID/google-sdk-ci', '.']
+  args: ['build', '-f', 'Dockerfile', '--tag=gcr.io/$PROJECT_ID/gcloud-ci', '.']
 
-- name: 'gcr.io/$PROJECT_ID/google-sdk-ci'
+- name: 'gcr.io/$PROJECT_ID/gcloud-ci'
   id: ListComponents
   waitFor:
   - BuildImage
 
-images: ['gcr.io/$PROJECT_ID/google-sdk-ci']
+images: ['gcr.io/$PROJECT_ID/gcloud-ci']
