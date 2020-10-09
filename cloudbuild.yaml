@@ -1,12 +1,14 @@
 steps:
 
-- name: 'gcr.io/cloud-builders/docker'
+- name: 'gcr.io/kaniko-project/executor:latest'
   id: BuildImage
-  args: ['build', '-f', 'Dockerfile', '--tag=gcr.io/$PROJECT_ID/gcloud-ci', '.']
+  args:
+    - --destination=gcr.io/$PROJECT_ID/gcloud-ci
+    - --cache=true
 
 - name: 'gcr.io/$PROJECT_ID/gcloud-ci'
   id: ListComponents
   waitFor:
   - BuildImage
 
-images: ['gcr.io/$PROJECT_ID/gcloud-ci']
+#images: ['gcr.io/$PROJECT_ID/gcloud-ci']
